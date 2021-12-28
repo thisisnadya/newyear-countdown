@@ -1,7 +1,13 @@
 const countdown = () => {
-    const setDate = new Date('Jan 1, 2022 00:00:00').getTime();
+    const setDate = new Date('Jan 01, 2022 00:00:00').getTime();
     const now = new Date().getTime();
     const gap = setDate - now;
+
+    if(gap <= 0){
+        playAnimation();
+        clearInterval(countdown);
+        return;
+    }
 
     const second = 1000;
     const minute = second * 60;
@@ -31,4 +37,16 @@ const countdown = () => {
     document.querySelector('.minutes').innerText = textMinute;
     document.querySelector('.seconds').innerText = textSecond;
 }
+
+function playAnimation() {
+    document.querySelector('.main').style.backgroundImage = "url('../img/firework.gif')";
+    const audio = document.getElementById('audio');
+    let containerCountdown = document.querySelector('.container');
+    let animation = document.querySelector('.animation');
+
+    containerCountdown.style.visibility = 'hidden';
+    animation.style.visibility = 'visible';
+    audio.play();
+}
+
 setInterval(countdown, 1000);
